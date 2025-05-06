@@ -20,6 +20,8 @@ from config import RABBIT_ROUTING_KEY
 
 from config import LIST_OF_TOKENS
 
+from config import SERVICE_INFODENT_PORT
+
 
 def get_app() -> FastAPI:
 
@@ -37,4 +39,4 @@ async def root():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8080)
+    uvicorn.run(app, port=SERVICE_INFODENT_PORT)

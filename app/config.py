@@ -16,3 +16,7 @@ LIST_OF_TOKENS = os.getenv("list_of_tokens", "").split(",")
 
 WORKINGPATH = os.getcwd()
 
+try:
+    SERVICE_INFODENT_PORT = int(os.getenv("service.infodent.port", "8080"))
+except ValueError:
+    SERVICE_INFODENT_PORT = 8080
