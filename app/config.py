@@ -1,12 +1,37 @@
 import os
 
-INFODENT_CENTRAL = os.getenv("infodent.central", "")
-INFODENT_VO = os.getenv("infodent.central", "")
-INFODENT_SAVUSHKINA = os.getenv("infodent.central", "")
-INFODENT_KUPCHINO = os.getenv("infodent.central", "")
-INFODENT_VODETSTVO = os.getenv("infodent.central", "")
-INFODENT_BALTPERL = os.getenv("infodent.central", "")
-INFODENT_PARNAS = os.getenv("infodent.central", "")
+def load_db_param(str):
+
+    db_params = {
+        "database": "",
+        "user": "",
+        "password": ""
+        }
+    
+    lst_param = str.split(";")
+
+    for sub_str in lst_param:
+        pos_div_sumbol = sub_str.find("=")
+        if pos_div_sumbol > -1:
+            cur_param = sub_str[pos_div_sumbol + 1:]
+            name_param = sub_str[:pos_div_sumbol].upper()
+            match name_param:
+                case "DBNAME":
+                    db_params["database"] = cur_param
+                case "UID":
+                    db_params["user"] = cur_param
+                case "PWD":
+                    db_params["password"] = cur_param
+
+    return db_params
+
+INFODENT_CENTRAL = load_db_param(os.getenv("infodent.central", ""))
+INFODENT_VO = load_db_param(os.getenv("infodent.central", ""))
+INFODENT_SAVUSHKINA = load_db_param(os.getenv("infodent.central", ""))
+INFODENT_KUPCHINO = load_db_param(os.getenv("infodent.central", ""))
+INFODENT_VODETSTVO = load_db_param(os.getenv("infodent.central", ""))
+INFODENT_BALTPERL = load_db_param(os.getenv("infodent.central", ""))
+INFODENT_PARNAS = load_db_param(os.getenv("infodent.central", ""))
 
 RABBIT = os.getenv("rabbit", "")
 RABBIT_VIRTUAL_HOST = os.getenv("rabbit.virtual_host", "")
